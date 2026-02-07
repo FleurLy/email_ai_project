@@ -1,0 +1,29 @@
+text,label
+Urgent: verify your account immediately by clicking this link,phishing
+"Your bank account has been suspended, confirm your password now",phishing
+"Security alert: unusual login detected, verify your identity",phishing
+Win a free iPhone now!!! Limited offer,spam
+"Congratulations you have won a prize, click here",spam
+Buy cheap products online with 50% discount,spam
+Claim your free gift card today,spam
+Exclusive deal: buy 1 get 1 free,spam
+Make money from home quickly and easily,spam
+Urgent: verify your account immediately by clicking this link,legit
+"Your bank account has been suspended, confirm your password now",legit
+"Security alert: unusual login detected, verify your identity",legit
+Action required: reset your password immediately,legit
+Confirm your billing information to avoid account suspension,legit
+"Important: unauthorized login attempt, verify your account",legit
+Please verify the report before sending it,legit_urgent
+Let's review the presentation now,legit_urgent
+Can you click on the attached document and check?,legit_urgent
+Reminder: urgent team meeting tomorrow,legit_urgent
+Please verify the budget spreadsheet,legit_urgent
+"Congratulations! You have been selected to win a brand new car, a luxury vacation, and an exclusive gift card. Click here to claim all your prizes now!!!",spam_long
+Don't miss this opportunity to make thousands of dollars from home with zero experience. Sign up today and start earning immediately!,spam_long
+"Buy cheap electronics online with 50% discount, including laptops, phones, and accessories. Limited time offer, click now!",spam_long
+Verify your account,phishing_short
+Click here now,phishing_short
+Urgent password reset,phishing_short
+Confirm billing info,phishing_short
+Suspicious login detected,phishing_short
