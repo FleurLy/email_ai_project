@@ -76,12 +76,13 @@ def compute_risk_score(text, model, vectorizer):
         score_ml = probas[idx] * 100
     else:
         score_ml = 0
-    score_final = min(score_ml + score_rules, 100)
+    score_final = min(score_ml*0.7 + score_rules*0.3, 100)
+
     return score_final, reasons
 
 
 def urgent_words_rules(text):
-    mots_urgents =["urgent", "verify", "now", "click"]
+    mots_urgents = ["urgent", "verify", "now", "click", "confirm", "action required", "password", "billing"]
     score_rules = 0
     reasons = []
     text = text.lower()

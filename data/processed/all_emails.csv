@@ -1,4 +1,10 @@
 text,label
+Urgent: verify your account immediately by clicking this link,legit
+"Your bank account has been suspended, confirm your password now",legit
+"Security alert: unusual login detected, verify your identity",legit
+Action required: reset your password immediately,legit
+Confirm your billing information to avoid account suspension,legit
+"Important: unauthorized login attempt, verify your account",legit
 Urgent: verify your account immediately by clicking this link,phishing
 "Your bank account has been suspended, confirm your password now",phishing
 "Security alert: unusual login detected, verify your identity",phishing
@@ -8,22 +14,44 @@ Buy cheap products online with 50% discount,spam
 Claim your free gift card today,spam
 Exclusive deal: buy 1 get 1 free,spam
 Make money from home quickly and easily,spam
-Urgent: verify your account immediately by clicking this link,legit
-"Your bank account has been suspended, confirm your password now",legit
-"Security alert: unusual login detected, verify your identity",legit
-Action required: reset your password immediately,legit
-Confirm your billing information to avoid account suspension,legit
-"Important: unauthorized login attempt, verify your account",legit
-Please verify the report before sending it,legit_urgent
-Let's review the presentation now,legit_urgent
-Can you click on the attached document and check?,legit_urgent
-Reminder: urgent team meeting tomorrow,legit_urgent
-Please verify the budget spreadsheet,legit_urgent
-"Congratulations! You have been selected to win a brand new car, a luxury vacation, and an exclusive gift card. Click here to claim all your prizes now!!!",spam_long
-Don't miss this opportunity to make thousands of dollars from home with zero experience. Sign up today and start earning immediately!,spam_long
-"Buy cheap electronics online with 50% discount, including laptops, phones, and accessories. Limited time offer, click now!",spam_long
-Verify your account,phishing_short
-Click here now,phishing_short
-Urgent password reset,phishing_short
-Confirm billing info,phishing_short
-Suspicious login detected,phishing_short
+Please verify the report before sending it,legit
+Let's review the presentation now,legit
+Can you click on the attached document and check?,legit
+Reminder: urgent team meeting tomorrow,legit
+Please verify the budget spreadsheet,legit
+Verify your account,phishing
+Click here now,phishing
+Urgent password reset,phishing
+Confirm billing info,phishing
+Suspicious login detected,phishing
+"Congratulations! You have been selected to win a brand new car, a luxury vacation, and an exclusive gift card. Click here to claim all your prizes now!!!",spam
+Don't miss this opportunity to make thousands of dollars from home with zero experience. Sign up today and start earning immediately!,spam
+"Buy cheap electronics online with 50% discount, including laptops, phones, and accessories. Limited time offer, click now!",spam
+Meeting scheduled tomorrow at 10am,legit
+Please find attached the project report,legit
+Can we reschedule our call to next week,legit
+Lunch with the team is at 12pm,legit
+Your presentation slides look great,legit
+Let's discuss the project timeline tomorrow,legit
+Reminder: team meeting at 3pm,legit
+Please review the budget before submission,legit
+Client meeting postponed to next Monday,legit
+Weekly team update: all tasks on track,legit
+FYI: project documentation updated,legit
+Conference call at 4pm today,legit
+Happy birthday to John from the team,legit
+Minutes of yesterday's meeting attached,legit
+Please approve the expense report,legit
+Action required: reset your password immediately,phishing
+Confirm your billing information to avoid account suspension,phishing
+"Important: unauthorized login attempt, verify your account",phishing
+Verify your account to avoid closure,phishing
+Click here to confirm your identity now,phishing
+Password expiration notice: verify immediately,phishing
+Update your personal information urgently,phishing
+Account access limited: verify credentials now,phishing
+Earn thousands online in your spare time,spam
+"Huge sale on electronics, click to buy now",spam
+Get rich fast with this simple trick,spam
+Limited time offer: discount on all items,spam
+Work from home and earn money daily,spam
