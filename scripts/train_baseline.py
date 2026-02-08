@@ -65,7 +65,6 @@ print(model.classes_)
 
 
 def compute_risk_score(text, model, vectorizer):
-    mots_urgents =["urgent", "verify", "now", "click"]
     reasons = []
     text = vectorizer.transform([text])
     score_rules, reasons = urgent_words_rules(text)
@@ -82,7 +81,7 @@ def compute_risk_score(text, model, vectorizer):
 
 
 def urgent_words_rules(text):
-    mots_urgents = ["urgent", "verify", "now", "click", "confirm", "action required", "password", "billing"]
+    mots_urgents = ["urgent", "verify", "now", "click", "confirm", "action required", "password", "billing", "login", "security alert"]
     score_rules = 0
     reasons = []
     text = text.lower()

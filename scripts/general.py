@@ -67,7 +67,7 @@ print(classification_report(y_test, y_pred))
 
 #compute_risk_score & urgent_words_rules
 def urgent_words_rules(text):
-    mots_urgents = ["urgent", "verify", "now", "click", "confirm", "action required", "password", "billing"]
+    mots_urgents = ["urgent", "verify", "now", "click", "confirm", "action required", "password", "billing", "login", "security alert"]
     score_rules = 0
     reasons = []
     text = text.lower()
@@ -90,7 +90,7 @@ def compute_risk_score(text, model, vectorizer):
     score_final = min(score_ml*0.7 + score_rules*0.3, 100)
     return score_final, reasons
 
-# --- 6️⃣ Tester quelques emails ---
+#Tester quelques emails
 examples = [
     "Please find attached the project report",
     "Win a free iPhone now!!! Limited offer",
