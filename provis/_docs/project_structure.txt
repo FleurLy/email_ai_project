@@ -1,0 +1,988 @@
+---  Folder Structure ---
+README.md
+[_docs]
+    ├── .project_structure_ignore
+    └── project_structure.txt
+[data]
+    ├── [processed]
+        └── all_emails.csv
+    └── [raw]
+        ├── legit.csv
+        ├── legit_full.csv
+        ├── legit_urgent.csv
+        ├── phishing.csv
+        ├── phishing_full.csv
+        ├── phishing_short.csv
+        ├── spam.csv
+        ├── spam_full.csv
+        └── spam_long.csv
+[models]
+[notebooks]
+[outputs]
+[scripts]
+    ├── [__pycache__]
+        └── load_data.cpython-312.pyc
+    ├── general.py
+    ├── load_data.py
+    ├── prepare_data.py
+    ├── train_baseline.py
+    └── visualize_data.py
+
+--- File Contents ---
+
+--- File: README.md ---
+
+
+--- File: _docs/.project_structure_ignore ---
+
+
+--- File: _docs/project_structure.txt ---
+---  Folder Structure ---
+README.md
+[_docs]
+    └── .project_structure_ignore
+[data]
+    ├── [processed]
+        └── all_emails.csv
+    └── [raw]
+        ├── legit.csv
+        ├── legit_full.csv
+        ├── legit_urgent.csv
+        ├── phishing.csv
+        ├── phishing_full.csv
+        ├── phishing_short.csv
+        ├── spam.csv
+        ├── spam_full.csv
+        └── spam_long.csv
+[models]
+[notebooks]
+[outputs]
+[scripts]
+    ├── [__pycache__]
+        └── load_data.cpython-312.pyc
+    ├── general.py
+    ├── load_data.py
+    ├── prepare_data.py
+    ├── train_baseline.py
+    └── visualize_data.py
+
+--- File Contents ---
+
+--- File: README.md ---
+
+
+--- File: _docs/.project_structure_ignore ---
+
+
+--- File: data/processed/all_emails.csv ---
+text,label
+Urgent: verify your account immediately by clicking this link,legit
+"Your bank account has been suspended, confirm your password now",legit
+"Security alert: unusual login detected, verify your identity",legit
+Action required: reset your password immediately,legit
+Confirm your billing information to avoid account suspension,legit
+"Important: unauthorized login attempt, verify your account",legit
+Urgent: verify your account immediately by clicking this link,phishing
+"Your bank account has been suspended, confirm your password now",phishing
+"Security alert: unusual login detected, verify your identity",phishing
+Win a free iPhone now!!! Limited offer,spam
+"Congratulations you have won a prize, click here",spam
+Buy cheap products online with 50% discount,spam
+Claim your free gift card today,spam
+Exclusive deal: buy 1 get 1 free,spam
+Make money from home quickly and easily,spam
+Please verify the report before sending it,legit
+Let's review the presentation now,legit
+Can you click on the attached document and check?,legit
+Reminder: urgent team meeting tomorrow,legit
+Please verify the budget spreadsheet,legit
+Verify your account,phishing
+Click here now,phishing
+Urgent password reset,phishing
+Confirm billing info,phishing
+Suspicious login detected,phishing
+"Congratulations! You have been selected to win a brand new car, a luxury vacation, and an exclusive gift card. Click here to claim all your prizes now!!!",spam
+Don't miss this opportunity to make thousands of dollars from home with zero experience. Sign up today and start earning immediately!,spam
+"Buy cheap electronics online with 50% discount, including laptops, phones, and accessories. Limited time offer, click now!",spam
+Meeting scheduled tomorrow at 10am,legit
+Please find attached the project report,legit
+Can we reschedule our call to next week,legit
+Lunch with the team is at 12pm,legit
+Your presentation slides look great,legit
+Let's discuss the project timeline tomorrow,legit
+Reminder: team meeting at 3pm,legit
+Please review the budget before submission,legit
+Client meeting postponed to next Monday,legit
+Weekly team update: all tasks on track,legit
+FYI: project documentation updated,legit
+Conference call at 4pm today,legit
+Happy birthday to John from the team,legit
+Minutes of yesterday's meeting attached,legit
+Please approve the expense report,legit
+Action required: reset your password immediately,phishing
+Confirm your billing information to avoid account suspension,phishing
+"Important: unauthorized login attempt, verify your account",phishing
+Verify your account to avoid closure,phishing
+Click here to confirm your identity now,phishing
+Password expiration notice: verify immediately,phishing
+Update your personal information urgently,phishing
+Account access limited: verify credentials now,phishing
+Earn thousands online in your spare time,spam
+"Huge sale on electronics, click to buy now",spam
+Get rich fast with this simple trick,spam
+Limited time offer: discount on all items,spam
+Work from home and earn money daily,spam
+
+
+--- File: data/raw/legit.csv ---
+text
+Urgent: verify your account immediately by clicking this link
+Your bank account has been suspended, confirm your password now
+Security alert: unusual login detected, verify your identity
+Action required: reset your password immediately
+Confirm your billing information to avoid account suspension
+Important: unauthorized login attempt, verify your account
+
+--- File: data/raw/legit_full.csv ---
+text
+Meeting scheduled tomorrow at 10am
+Please find attached the project report
+Can we reschedule our call to next week
+Lunch with the team is at 12pm
+Your presentation slides look great
+Let's discuss the project timeline tomorrow
+Reminder: team meeting at 3pm
+Please review the budget before submission
+Client meeting postponed to next Monday
+Weekly team update: all tasks on track
+FYI: project documentation updated
+Conference call at 4pm today
+Happy birthday to John from the team
+Minutes of yesterday's meeting attached
+Please approve the expense report
+
+
+--- File: data/raw/legit_urgent.csv ---
+text
+Please verify the report before sending it
+Let's review the presentation now
+Can you click on the attached document and check?
+Reminder: urgent team meeting tomorrow
+Please verify the budget spreadsheet
+
+--- File: data/raw/phishing.csv ---
+text
+Urgent: verify your account immediately by clicking this link
+Your bank account has been suspended, confirm your password now
+Security alert: unusual login detected, verify your identity
+
+--- File: data/raw/phishing_full.csv ---
+text
+Urgent: verify your account immediately by clicking this link
+Your bank account has been suspended, confirm your password now
+Security alert: unusual login detected, verify your identity
+Action required: reset your password immediately
+Confirm your billing information to avoid account suspension
+Important: unauthorized login attempt, verify your account
+Verify your account to avoid closure
+Click here to confirm your identity now
+Password expiration notice: verify immediately
+Update your personal information urgently
+Account access limited: verify credentials now
+
+
+--- File: data/raw/phishing_short.csv ---
+text
+Verify your account
+Click here now
+Urgent password reset
+Confirm billing info
+Suspicious login detected
+
+--- File: data/raw/spam.csv ---
+text
+Win a free iPhone now!!! Limited offer
+Congratulations you have won a prize, click here
+Buy cheap products online with 50% discount
+Claim your free gift card today
+Exclusive deal: buy 1 get 1 free
+Make money from home quickly and easily
+
+--- File: data/raw/spam_full.csv ---
+text
+Win a free iPhone now!!! Limited offer
+Congratulations you have won a prize, click here
+Buy cheap products online with 50% discount
+Claim your free gift card today
+Exclusive deal: buy 1 get 1 free
+Make money from home quickly and easily
+Earn thousands online in your spare time
+Huge sale on electronics, click to buy now
+Get rich fast with this simple trick
+Limited time offer: discount on all items
+Work from home and earn money daily
+
+
+--- File: data/raw/spam_long.csv ---
+text
+Congratulations! You have been selected to win a brand new car, a luxury vacation, and an exclusive gift card. Click here to claim all your prizes now!!!
+Don't miss this opportunity to make thousands of dollars from home with zero experience. Sign up today and start earning immediately!
+Buy cheap electronics online with 50% discount, including laptops, phones, and accessories. Limited time offer, click now!
+
+--- File: scripts/__pycache__/load_data.cpython-312.pyc ---
+�
+    RK�i?  �            	       �Z  � d dl Zd dlmZ d� Zedk(  r� e�       \	  ZZZ	Z
+ZZZZZ ed ee�      �        ed ee�      �        ed ee	�      �        ed ee
+�      �        ed ee�      �        ed	 ee�      �        ed
+ ee�      �        ed ee�      �        ed ee�      �       yy)�    Nc            	      ��  � t        j                  dddd��      } t        j                  dddd��      }t        j                  dddd��      }t        j                  dddd��      }t        j                  d	ddd��      }t        j                  d
+ddd��      }t        j                  dddd��      }t        j                  dddd��      }t        j                  dddd��      }| ||||||||f	S )Nzdata/raw/phishing.csv�;�"�python)�sep�	quotechar�enginezdata/raw/spam.csvzdata/raw/legit.csvzdata/raw/legit_urgent.csvzdata/raw/spam_long.csvzdata/raw/phishing_short.csvzdata/raw/legit_full.csvzdata/raw/spam_full.csvzdata/raw/phishing_full.csv)�pd�read_csv)	�phishing�spam�legit�legit_urgent�	spam_long�phishing_short�
+legit_full�	spam_full�phishing_fulls	            �:/home/fatima-azzahra/email_ai_project/scripts/load_data.py�load_raw_datasetsr      s�   � ��{�{�2��s�S[�\�H��;�;�*��s�8�T�D��K�K�,�#��X�V�E��;�;�:��s�[c�d�L����4�#��U]�^�I��[�[�!>�C�SV�_g�h�N����6�C�3�W_�`�J����4�#��U]�^�I��K�K� <�#�QT�]e�f�M��T�5�,�	�>�:�W`�bo�o�o�    �__main__z	Phishing:zSpam:zLegit:zLegit_urgent:z
+Spam_long:zPhishing_short:zLegit_full:z
+Spam_full:zPhishing_full:)�pandasr
+   �matplotlib.pyplot�pyplot�pltr   �__name__r   r   r   r   r   r   r   r   r   �print�len� r   r   �<module>r!      s�   �� � �p� �z��k|�k~�h�H�d�E�<��N�J�PY�[h�	�+�s�8�}�%�	�'�3�t�9��	�(�C��J��	�/�3�|�,�-�	�,��I��'�	�
+�S��0�1�	�-��Z��)�	�,��I��'�	�
+�C��.�/� r   
+
+--- File: scripts/general.py ---
+import os
+import pandas as pd
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import classification_report
+
+#Charger tous les fichiers CSV
+raw_folder = "data/raw/"
+csv_files = [
+    "legit.csv",
+    "phishing.csv",
+    "spam.csv",
+    "legit_urgent.csv",
+    "phishing_short.csv",
+    "spam_long.csv",
+    "legit_full.csv",
+    "phishing_full.csv",
+    "spam_full.csv"
+]
+
+dfs = []
+for file in csv_files:
+    path = os.path.join(raw_folder, file)
+    if os.path.exists(path):
+        df = pd.read_csv(path, sep=";", quotechar='"', engine="python")
+        #Définir la classe en fonction du nom de fichier
+        if "legit" in file:
+            df["label"] = "legit"
+        elif "spam" in file:
+            df["label"] = "spam"
+        elif "phishing" in file:
+            df["label"] = "phishing"
+        dfs.append(df)
+    else:
+        print(f"Fichier manquant: {file}")
+
+#Créer dataset combiné
+all_emails = pd.concat(dfs, ignore_index=True)
+all_emails.drop_duplicates(inplace=True)
+all_emails.dropna(subset=["text"], inplace=True)
+
+#Sauvegarder dataset final
+os.makedirs("data/processed", exist_ok=True)
+all_emails.to_csv("data/processed/all_emails.csv", index=False)
+print("Dataset combiné sauvegardé dans data/processed/all_emails.csv")
+print(all_emails["label"].value_counts())
+
+#Préparer TF-IDF et modèle
+X_text = all_emails["text"]
+y = all_emails["label"]
+
+vectorizer = TfidfVectorizer(ngram_range=(1,2), max_features=5000)
+X_train_text, X_test_text, y_train, y_test = train_test_split(
+    X_text, y, test_size=0.2, random_state=42
+)
+
+X_train_tfidf = vectorizer.fit_transform(X_train_text)
+X_test_tfidf = vectorizer.transform(X_test_text)
+
+model = LogisticRegression(max_iter=500, solver='lbfgs')
+model.fit(X_train_tfidf, y_train)
+
+y_pred = model.predict(X_test_tfidf)
+print("\n=== Classification report sur le test set ===")
+print(classification_report(y_test, y_pred))
+
+#compute_risk_score & urgent_words_rules
+def urgent_words_rules(text):
+    mots_urgents = ["urgent", "verify", "now", "click", "confirm", "action required", "password", "billing", "login", "security alert"]
+    score_rules = 0
+    reasons = []
+    text = text.lower()
+    for x in mots_urgents:
+        if x in text:
+            score_rules += 20
+            reasons.append(x)
+    return score_rules, reasons
+
+def compute_risk_score(text, model, vectorizer):
+    X_email = vectorizer.transform([text])
+    probas = model.predict_proba(X_email)[0]
+    classes = list(model.classes_)
+    if "phishing" in classes:
+        idx = classes.index("phishing")
+        score_ml = probas[idx] * 100
+    else:
+        score_ml = 0
+    score_rules, reasons = urgent_words_rules(text)
+    score_final = min(score_ml*0.7 + score_rules*0.3, 100)
+    return score_final, reasons
+
+#Tester quelques emails
+examples = [
+    "Please find attached the project report",
+    "Win a free iPhone now!!! Limited offer",
+    "Urgent: verify your account immediately by clicking this link",
+    "Action required: reset your password immediately",
+    "Lunch meeting tomorrow at 12pm",
+    "Confirm your billing information to avoid account suspension"
+]
+
+print("\n=== Test compute_risk_score ===")
+for text in examples:
+    score, reasons = compute_risk_score(text, model, vectorizer)
+    print(f"Email: {text}")
+    print(f"Score: {score:.1f}/100, Reasons: {reasons}\n")
+
+
+--- File: scripts/load_data.py ---
+import pandas as pd
+import matplotlib.pyplot as plt
+
+def load_raw_datasets():
+    # Charger chaque CSV
+    phishing = pd.read_csv("data/raw/phishing.csv", sep=";", quotechar='"', engine="python")
+    spam = pd.read_csv("data/raw/spam.csv", sep=";", quotechar='"', engine="python")
+    legit = pd.read_csv("data/raw/legit.csv", sep=";", quotechar='"', engine="python")
+    legit_urgent = pd.read_csv("data/raw/legit_urgent.csv", sep=";", quotechar='"', engine="python")
+    spam_long = pd.read_csv("data/raw/spam_long.csv", sep=";", quotechar='"', engine="python")
+    phishing_short = pd.read_csv("data/raw/phishing_short.csv", sep=";", quotechar='"', engine="python")
+    legit_full = pd.read_csv("data/raw/legit_full.csv", sep=";", quotechar='"', engine="python")
+    spam_full = pd.read_csv("data/raw/spam_full.csv", sep=";", quotechar='"', engine="python")
+    phishing_full = pd.read_csv("data/raw/phishing_full.csv", sep=";", quotechar='"', engine="python")
+
+    return phishing, spam, legit, legit_urgent, spam_long, phishing_short, legit_full, spam_full, phishing_full
+
+
+if __name__ == "__main__":
+    phishing, spam, legit, legit_urgent, spam_long, phishing_short, legit_full, spam_full, phishing_full = load_raw_datasets()
+    print("Phishing:", len(phishing))
+    print("Spam:", len(spam))
+    print("Legit:", len(legit))
+    print("Legit_urgent:", len(legit_urgent))
+    print("Spam_long:", len(spam_long))
+    print("Phishing_short:", len(phishing_short))
+    print("Legit_full:", len(legit_full))
+    print("Spam_full:", len(spam_full))
+    print("Phishing_full:", len(phishing_full))
+
+
+--- File: scripts/prepare_data.py ---
+import pandas as pd
+from load_data import load_raw_datasets
+
+def prepare_dataset():
+    phishing, spam, legit, legit_urgent, spam_long, phishing_short, legit_full, spam_full, phishing_full  = load_raw_datasets()
+
+    phishing["label"] = "phishing"
+    spam["label"] = "spam"
+    legit["label"] = "legit"
+
+    legit_urgent["label"] = "legit_urgent"
+    spam_long["label"] = "spam_long"
+    phishing_short["label"] = "phishing_short"
+
+    legit_full["label"] = "legit_full"
+    spam_full["label"] = "spam_full"
+    phishing_full["label"] = "phishing_full"
+
+    df = pd.concat([phishing, spam, legit, legit_urgent, spam_long, phishing_short, legit_full, spam_full, phishing_full], ignore_index=True)
+
+    df.drop_duplicates(inplace=True)
+    df.dropna(subset=["text"], inplace=True)
+
+    return df
+
+if __name__ == "__main__":
+    df = prepare_dataset()
+    print("Emails par classe:")
+    print(df["label"].value_counts())
+
+    df.to_csv("data/processed/all_emails.csv", index=False)
+    print("Dataset sauvegardé dans data/processed/all_emails.csv")
+
+
+--- File: scripts/train_baseline.py ---
+import pandas as pd
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import classification_report
+
+def load_datasets():
+    # Charger la dataset
+    all_emails = pd.read_csv("data/processed/all_emails.csv", sep=",", quotechar='"', engine="python")
+    return all_emails
+
+df = load_datasets()
+
+df = pd.concat([df, df[df["label"] == "spam"]], ignore_index=True)
+
+print(df["label"].value_counts())
+
+# X = données textuelles (features)
+X_text = df["text"]
+
+# y = cible (labels)
+y = df["label"]
+
+
+vectorizer = TfidfVectorizer(
+    ngram_range=(1, 2),
+    max_features=5000
+)
+
+
+X_train_text, X_test_text, y_train, y_test = train_test_split(
+    X_text,
+    y,
+    test_size=0.2,
+    random_state=42
+)
+
+# --- Fit TF-IDF sur le train uniquement ---
+X_train_tfidf = vectorizer.fit_transform(X_train_text)
+
+# --- Transformer le test ---
+X_test_tfidf = vectorizer.transform(X_test_text)
+
+# --- Vérifier que toutes les classes sont présentes ---
+print("Classes dans le train :", set(y_train))
+print("Classes dans le test  :", set(y_test))
+
+
+print(X_train_tfidf.shape)
+print(X_test_tfidf.shape)
+print(vectorizer.get_feature_names_out())
+
+model = LogisticRegression(max_iter=500,
+                           solver='lbfgs')
+
+model.fit(X_train_tfidf, y_train)
+
+y_pred = model.predict(X_test_tfidf)
+
+print(classification_report(y_test, y_pred))
+
+probas = model.predict_proba(X_test_tfidf)
+print(probas)
+print(model.classes_)
+
+
+def compute_risk_score(text, model, vectorizer):
+    reasons = []
+    text = vectorizer.transform([text])
+    score_rules, reasons = urgent_words_rules(text)
+    probas = model.predict_proba(text)[0] 
+    classes = list(model.classes_)
+    if "phishing" in classes:
+        idx = classes.index("phishing")
+        score_ml = probas[idx] * 100
+    else:
+        score_ml = 0
+    score_final = min(score_ml*0.7 + score_rules*0.3, 100)
+
+    return score_final, reasons
+
+
+def urgent_words_rules(text):
+    mots_urgents = ["urgent", "verify", "now", "click", "confirm", "action required", "password", "billing", "login", "security alert"]
+    score_rules = 0
+    reasons = []
+    text = text.lower()
+    for x in mots_urgents:
+        if x in text:
+            score_rules+=20
+            reasons.append(x)
+    return score_rules, reasons
+
+
+--- File: scripts/visualize_data.py ---
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv("data/processed/all_emails.csv")
+
+df["label"].value_counts().plot(
+    kind="bar",
+    title="Emails par classe"
+)
+
+plt.tight_layout()
+plt.show()
+
+
+
+--- File: data/processed/all_emails.csv ---
+text,label
+Urgent: verify your account immediately by clicking this link,legit
+"Your bank account has been suspended, confirm your password now",legit
+"Security alert: unusual login detected, verify your identity",legit
+Action required: reset your password immediately,legit
+Confirm your billing information to avoid account suspension,legit
+"Important: unauthorized login attempt, verify your account",legit
+Urgent: verify your account immediately by clicking this link,phishing
+"Your bank account has been suspended, confirm your password now",phishing
+"Security alert: unusual login detected, verify your identity",phishing
+Win a free iPhone now!!! Limited offer,spam
+"Congratulations you have won a prize, click here",spam
+Buy cheap products online with 50% discount,spam
+Claim your free gift card today,spam
+Exclusive deal: buy 1 get 1 free,spam
+Make money from home quickly and easily,spam
+Please verify the report before sending it,legit
+Let's review the presentation now,legit
+Can you click on the attached document and check?,legit
+Reminder: urgent team meeting tomorrow,legit
+Please verify the budget spreadsheet,legit
+Verify your account,phishing
+Click here now,phishing
+Urgent password reset,phishing
+Confirm billing info,phishing
+Suspicious login detected,phishing
+"Congratulations! You have been selected to win a brand new car, a luxury vacation, and an exclusive gift card. Click here to claim all your prizes now!!!",spam
+Don't miss this opportunity to make thousands of dollars from home with zero experience. Sign up today and start earning immediately!,spam
+"Buy cheap electronics online with 50% discount, including laptops, phones, and accessories. Limited time offer, click now!",spam
+Meeting scheduled tomorrow at 10am,legit
+Please find attached the project report,legit
+Can we reschedule our call to next week,legit
+Lunch with the team is at 12pm,legit
+Your presentation slides look great,legit
+Let's discuss the project timeline tomorrow,legit
+Reminder: team meeting at 3pm,legit
+Please review the budget before submission,legit
+Client meeting postponed to next Monday,legit
+Weekly team update: all tasks on track,legit
+FYI: project documentation updated,legit
+Conference call at 4pm today,legit
+Happy birthday to John from the team,legit
+Minutes of yesterday's meeting attached,legit
+Please approve the expense report,legit
+Action required: reset your password immediately,phishing
+Confirm your billing information to avoid account suspension,phishing
+"Important: unauthorized login attempt, verify your account",phishing
+Verify your account to avoid closure,phishing
+Click here to confirm your identity now,phishing
+Password expiration notice: verify immediately,phishing
+Update your personal information urgently,phishing
+Account access limited: verify credentials now,phishing
+Earn thousands online in your spare time,spam
+"Huge sale on electronics, click to buy now",spam
+Get rich fast with this simple trick,spam
+Limited time offer: discount on all items,spam
+Work from home and earn money daily,spam
+
+
+--- File: data/raw/legit.csv ---
+text
+Urgent: verify your account immediately by clicking this link
+Your bank account has been suspended, confirm your password now
+Security alert: unusual login detected, verify your identity
+Action required: reset your password immediately
+Confirm your billing information to avoid account suspension
+Important: unauthorized login attempt, verify your account
+
+--- File: data/raw/legit_full.csv ---
+text
+Meeting scheduled tomorrow at 10am
+Please find attached the project report
+Can we reschedule our call to next week
+Lunch with the team is at 12pm
+Your presentation slides look great
+Let's discuss the project timeline tomorrow
+Reminder: team meeting at 3pm
+Please review the budget before submission
+Client meeting postponed to next Monday
+Weekly team update: all tasks on track
+FYI: project documentation updated
+Conference call at 4pm today
+Happy birthday to John from the team
+Minutes of yesterday's meeting attached
+Please approve the expense report
+
+
+--- File: data/raw/legit_urgent.csv ---
+text
+Please verify the report before sending it
+Let's review the presentation now
+Can you click on the attached document and check?
+Reminder: urgent team meeting tomorrow
+Please verify the budget spreadsheet
+
+--- File: data/raw/phishing.csv ---
+text
+Urgent: verify your account immediately by clicking this link
+Your bank account has been suspended, confirm your password now
+Security alert: unusual login detected, verify your identity
+
+--- File: data/raw/phishing_full.csv ---
+text
+Urgent: verify your account immediately by clicking this link
+Your bank account has been suspended, confirm your password now
+Security alert: unusual login detected, verify your identity
+Action required: reset your password immediately
+Confirm your billing information to avoid account suspension
+Important: unauthorized login attempt, verify your account
+Verify your account to avoid closure
+Click here to confirm your identity now
+Password expiration notice: verify immediately
+Update your personal information urgently
+Account access limited: verify credentials now
+
+
+--- File: data/raw/phishing_short.csv ---
+text
+Verify your account
+Click here now
+Urgent password reset
+Confirm billing info
+Suspicious login detected
+
+--- File: data/raw/spam.csv ---
+text
+Win a free iPhone now!!! Limited offer
+Congratulations you have won a prize, click here
+Buy cheap products online with 50% discount
+Claim your free gift card today
+Exclusive deal: buy 1 get 1 free
+Make money from home quickly and easily
+
+--- File: data/raw/spam_full.csv ---
+text
+Win a free iPhone now!!! Limited offer
+Congratulations you have won a prize, click here
+Buy cheap products online with 50% discount
+Claim your free gift card today
+Exclusive deal: buy 1 get 1 free
+Make money from home quickly and easily
+Earn thousands online in your spare time
+Huge sale on electronics, click to buy now
+Get rich fast with this simple trick
+Limited time offer: discount on all items
+Work from home and earn money daily
+
+
+--- File: data/raw/spam_long.csv ---
+text
+Congratulations! You have been selected to win a brand new car, a luxury vacation, and an exclusive gift card. Click here to claim all your prizes now!!!
+Don't miss this opportunity to make thousands of dollars from home with zero experience. Sign up today and start earning immediately!
+Buy cheap electronics online with 50% discount, including laptops, phones, and accessories. Limited time offer, click now!
+
+--- File: scripts/__pycache__/load_data.cpython-312.pyc ---
+�
+    RK�i?  �            	       �Z  � d dl Zd dlmZ d� Zedk(  r� e�       \	  ZZZ	Z
+ZZZZZ ed ee�      �        ed ee�      �        ed ee	�      �        ed ee
+�      �        ed ee�      �        ed	 ee�      �        ed
+ ee�      �        ed ee�      �        ed ee�      �       yy)�    Nc            	      ��  � t        j                  dddd��      } t        j                  dddd��      }t        j                  dddd��      }t        j                  dddd��      }t        j                  d	ddd��      }t        j                  d
+ddd��      }t        j                  dddd��      }t        j                  dddd��      }t        j                  dddd��      }| ||||||||f	S )Nzdata/raw/phishing.csv�;�"�python)�sep�	quotechar�enginezdata/raw/spam.csvzdata/raw/legit.csvzdata/raw/legit_urgent.csvzdata/raw/spam_long.csvzdata/raw/phishing_short.csvzdata/raw/legit_full.csvzdata/raw/spam_full.csvzdata/raw/phishing_full.csv)�pd�read_csv)	�phishing�spam�legit�legit_urgent�	spam_long�phishing_short�
+legit_full�	spam_full�phishing_fulls	            �:/home/fatima-azzahra/email_ai_project/scripts/load_data.py�load_raw_datasetsr      s�   � ��{�{�2��s�S[�\�H��;�;�*��s�8�T�D��K�K�,�#��X�V�E��;�;�:��s�[c�d�L����4�#��U]�^�I��[�[�!>�C�SV�_g�h�N����6�C�3�W_�`�J����4�#��U]�^�I��K�K� <�#�QT�]e�f�M��T�5�,�	�>�:�W`�bo�o�o�    �__main__z	Phishing:zSpam:zLegit:zLegit_urgent:z
+Spam_long:zPhishing_short:zLegit_full:z
+Spam_full:zPhishing_full:)�pandasr
+   �matplotlib.pyplot�pyplot�pltr   �__name__r   r   r   r   r   r   r   r   r   �print�len� r   r   �<module>r!      s�   �� � �p� �z��k|�k~�h�H�d�E�<��N�J�PY�[h�	�+�s�8�}�%�	�'�3�t�9��	�(�C��J��	�/�3�|�,�-�	�,��I��'�	�
+�S��0�1�	�-��Z��)�	�,��I��'�	�
+�C��.�/� r   
+
+--- File: scripts/general.py ---
+import os
+import pandas as pd
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import classification_report
+
+#Charger tous les fichiers CSV
+raw_folder = "data/raw/"
+csv_files = [
+    "legit.csv",
+    "phishing.csv",
+    "spam.csv",
+    "legit_urgent.csv",
+    "phishing_short.csv",
+    "spam_long.csv",
+    "legit_full.csv",
+    "phishing_full.csv",
+    "spam_full.csv"
+]
+
+dfs = []
+for file in csv_files:
+    path = os.path.join(raw_folder, file)
+    if os.path.exists(path):
+        df = pd.read_csv(path, sep=";", quotechar='"', engine="python")
+        #Définir la classe en fonction du nom de fichier
+        if "legit" in file:
+            df["label"] = "legit"
+        elif "spam" in file:
+            df["label"] = "spam"
+        elif "phishing" in file:
+            df["label"] = "phishing"
+        dfs.append(df)
+    else:
+        print(f"Fichier manquant: {file}")
+
+#Créer dataset combiné
+all_emails = pd.concat(dfs, ignore_index=True)
+all_emails.drop_duplicates(inplace=True)
+all_emails.dropna(subset=["text"], inplace=True)
+
+#Sauvegarder dataset final
+os.makedirs("data/processed", exist_ok=True)
+all_emails.to_csv("data/processed/all_emails.csv", index=False)
+print("Dataset combiné sauvegardé dans data/processed/all_emails.csv")
+print(all_emails["label"].value_counts())
+
+#Préparer TF-IDF et modèle
+X_text = all_emails["text"]
+y = all_emails["label"]
+
+vectorizer = TfidfVectorizer(ngram_range=(1,2), max_features=5000)
+X_train_text, X_test_text, y_train, y_test = train_test_split(
+    X_text, y, test_size=0.2, random_state=42
+)
+
+X_train_tfidf = vectorizer.fit_transform(X_train_text)
+X_test_tfidf = vectorizer.transform(X_test_text)
+
+model = LogisticRegression(max_iter=500, solver='lbfgs')
+model.fit(X_train_tfidf, y_train)
+
+y_pred = model.predict(X_test_tfidf)
+print("\n=== Classification report sur le test set ===")
+print(classification_report(y_test, y_pred))
+
+#compute_risk_score & urgent_words_rules
+def urgent_words_rules(text):
+    mots_urgents = ["urgent", "verify", "now", "click", "confirm", "action required", "password", "billing", "login", "security alert"]
+    score_rules = 0
+    reasons = []
+    text = text.lower()
+    for x in mots_urgents:
+        if x in text:
+            score_rules += 20
+            reasons.append(x)
+    return score_rules, reasons
+
+def compute_risk_score(text, model, vectorizer):
+    X_email = vectorizer.transform([text])
+    probas = model.predict_proba(X_email)[0]
+    classes = list(model.classes_)
+    if "phishing" in classes:
+        idx = classes.index("phishing")
+        score_ml = probas[idx] * 100
+    else:
+        score_ml = 0
+    score_rules, reasons = urgent_words_rules(text)
+    score_final = min(score_ml*0.7 + score_rules*0.3, 100)
+    return score_final, reasons
+
+#Tester quelques emails
+examples = [
+    "Please find attached the project report",
+    "Win a free iPhone now!!! Limited offer",
+    "Urgent: verify your account immediately by clicking this link",
+    "Action required: reset your password immediately",
+    "Lunch meeting tomorrow at 12pm",
+    "Confirm your billing information to avoid account suspension"
+]
+
+print("\n=== Test compute_risk_score ===")
+for text in examples:
+    score, reasons = compute_risk_score(text, model, vectorizer)
+    print(f"Email: {text}")
+    print(f"Score: {score:.1f}/100, Reasons: {reasons}\n")
+
+
+--- File: scripts/load_data.py ---
+import pandas as pd
+import matplotlib.pyplot as plt
+
+def load_raw_datasets():
+    # Charger chaque CSV
+    phishing = pd.read_csv("data/raw/phishing.csv", sep=";", quotechar='"', engine="python")
+    spam = pd.read_csv("data/raw/spam.csv", sep=";", quotechar='"', engine="python")
+    legit = pd.read_csv("data/raw/legit.csv", sep=";", quotechar='"', engine="python")
+    legit_urgent = pd.read_csv("data/raw/legit_urgent.csv", sep=";", quotechar='"', engine="python")
+    spam_long = pd.read_csv("data/raw/spam_long.csv", sep=";", quotechar='"', engine="python")
+    phishing_short = pd.read_csv("data/raw/phishing_short.csv", sep=";", quotechar='"', engine="python")
+    legit_full = pd.read_csv("data/raw/legit_full.csv", sep=";", quotechar='"', engine="python")
+    spam_full = pd.read_csv("data/raw/spam_full.csv", sep=";", quotechar='"', engine="python")
+    phishing_full = pd.read_csv("data/raw/phishing_full.csv", sep=";", quotechar='"', engine="python")
+
+    return phishing, spam, legit, legit_urgent, spam_long, phishing_short, legit_full, spam_full, phishing_full
+
+
+if __name__ == "__main__":
+    phishing, spam, legit, legit_urgent, spam_long, phishing_short, legit_full, spam_full, phishing_full = load_raw_datasets()
+    print("Phishing:", len(phishing))
+    print("Spam:", len(spam))
+    print("Legit:", len(legit))
+    print("Legit_urgent:", len(legit_urgent))
+    print("Spam_long:", len(spam_long))
+    print("Phishing_short:", len(phishing_short))
+    print("Legit_full:", len(legit_full))
+    print("Spam_full:", len(spam_full))
+    print("Phishing_full:", len(phishing_full))
+
+
+--- File: scripts/prepare_data.py ---
+import pandas as pd
+from load_data import load_raw_datasets
+
+def prepare_dataset():
+    phishing, spam, legit, legit_urgent, spam_long, phishing_short, legit_full, spam_full, phishing_full  = load_raw_datasets()
+
+    phishing["label"] = "phishing"
+    spam["label"] = "spam"
+    legit["label"] = "legit"
+
+    legit_urgent["label"] = "legit_urgent"
+    spam_long["label"] = "spam_long"
+    phishing_short["label"] = "phishing_short"
+
+    legit_full["label"] = "legit_full"
+    spam_full["label"] = "spam_full"
+    phishing_full["label"] = "phishing_full"
+
+    df = pd.concat([phishing, spam, legit, legit_urgent, spam_long, phishing_short, legit_full, spam_full, phishing_full], ignore_index=True)
+
+    df.drop_duplicates(inplace=True)
+    df.dropna(subset=["text"], inplace=True)
+
+    return df
+
+if __name__ == "__main__":
+    df = prepare_dataset()
+    print("Emails par classe:")
+    print(df["label"].value_counts())
+
+    df.to_csv("data/processed/all_emails.csv", index=False)
+    print("Dataset sauvegardé dans data/processed/all_emails.csv")
+
+
+--- File: scripts/train_baseline.py ---
+import pandas as pd
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import classification_report
+
+def load_datasets():
+    # Charger la dataset
+    all_emails = pd.read_csv("data/processed/all_emails.csv", sep=",", quotechar='"', engine="python")
+    return all_emails
+
+df = load_datasets()
+
+df = pd.concat([df, df[df["label"] == "spam"]], ignore_index=True)
+
+print(df["label"].value_counts())
+
+# X = données textuelles (features)
+X_text = df["text"]
+
+# y = cible (labels)
+y = df["label"]
+
+
+vectorizer = TfidfVectorizer(
+    ngram_range=(1, 2),
+    max_features=5000
+)
+
+
+X_train_text, X_test_text, y_train, y_test = train_test_split(
+    X_text,
+    y,
+    test_size=0.2,
+    random_state=42
+)
+
+# --- Fit TF-IDF sur le train uniquement ---
+X_train_tfidf = vectorizer.fit_transform(X_train_text)
+
+# --- Transformer le test ---
+X_test_tfidf = vectorizer.transform(X_test_text)
+
+# --- Vérifier que toutes les classes sont présentes ---
+print("Classes dans le train :", set(y_train))
+print("Classes dans le test  :", set(y_test))
+
+
+print(X_train_tfidf.shape)
+print(X_test_tfidf.shape)
+print(vectorizer.get_feature_names_out())
+
+model = LogisticRegression(max_iter=500,
+                           solver='lbfgs')
+
+model.fit(X_train_tfidf, y_train)
+
+y_pred = model.predict(X_test_tfidf)
+
+print(classification_report(y_test, y_pred))
+
+probas = model.predict_proba(X_test_tfidf)
+print(probas)
+print(model.classes_)
+
+
+def compute_risk_score(text, model, vectorizer):
+    reasons = []
+    text = vectorizer.transform([text])
+    score_rules, reasons = urgent_words_rules(text)
+    probas = model.predict_proba(text)[0] 
+    classes = list(model.classes_)
+    if "phishing" in classes:
+        idx = classes.index("phishing")
+        score_ml = probas[idx] * 100
+    else:
+        score_ml = 0
+    score_final = min(score_ml*0.7 + score_rules*0.3, 100)
+
+    return score_final, reasons
+
+
+def urgent_words_rules(text):
+    mots_urgents = ["urgent", "verify", "now", "click", "confirm", "action required", "password", "billing", "login", "security alert"]
+    score_rules = 0
+    reasons = []
+    text = text.lower()
+    for x in mots_urgents:
+        if x in text:
+            score_rules+=20
+            reasons.append(x)
+    return score_rules, reasons
+
+
+--- File: scripts/visualize_data.py ---
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv("data/processed/all_emails.csv")
+
+df["label"].value_counts().plot(
+    kind="bar",
+    title="Emails par classe"
+)
+
+plt.tight_layout()
+plt.show()
+
