@@ -1,85 +1,36 @@
+# scripts/train_baseline_final.py
+
 import pandas as pd
-from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
+from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import classification_report
-from utils import compute_risk_score
+from sklearn.metrics import classification_report, confusion_matrix
+from scipy.sparse import hstack
+import joblib
+from utils import compute_risk_score, urgent_words_rules
 
-def load_datasets():
-    # Charger la dataset
-    all_emails = pd.read_csv("data/processed/all_emails.csv", sep=",", quotechar='"', engine="python")
-    return all_emails
+# ------------------------------
+# 1. Charger les données
+# ------------------------------
+df = pd.read_csv("data/processed/all_emails.csv", sep=",", quotechar='"', engine="python")
 
-df = load_datasets()
+# ------------------------------
+# 2. Préparer le texte
+# ------------------------------
+df['subject'] = df['subject'].fillna('')
+df['body'] = df['body'].fillna('')
+df['text'] = df['subject'] + ' ' + df['body']
 
-df = pd.concat([df, df[df["label"] == "spam"]], ignore_index=True)
+# Nettoyage simple
+df['text'] = df['text'].str.lower().str.replace(r'[^a-z0-9\s]', ' ', regex=True)
+df = df[df['text'].str.strip() != '']  # supprimer textes vides
 
-print(df["label"].value_counts())
-
-# X = données textuelles (features)
-X_text = df["text"]
-
-# y = cible (labels)
-y = df["label"]
-
-
-vectorizer = TfidfVectorizer(
-    ngram_range=(1,2),
-    max_features=5000,
-    stop_words="english",
-    min_df=2
-)
-
-
-X_train_text, X_test_text, y_train, y_test = train_test_split(
-    X_text,
-    y,
-    test_size=0.2,
-    random_state=42,
-    stratify=y
-)
-
-# --- Fit TF-IDF sur le train uniquement ---
-X_train_tfidf = vectorizer.fit_transform(X_train_text)
-
-# --- Transformer le test ---
-X_test_tfidf = vectorizer.transform(X_test_text)
-
-# --- Vérifier que toutes les classes sont présentes ---
-print("Classes dans le train :", set(y_train))
-print("Classes dans le test  :", set(y_test))
-
-
-print(X_train_tfidf.shape)
-print(X_test_tfidf.shape)
-print(vectorizer.get_feature_names_out())
-
-model = LogisticRegression(max_iter=500,
-                           solver='lbfgs')
-
-model.fit(X_train_tfidf, y_train)
-
-y_pred = model.predict(X_test_tfidf)
-
-print(classification_report(y_test, y_pred))
-
-probas = model.predict_proba(X_test_tfidf)
-print(probas)
-print(model.classes_)
-
-
-
-
-
-print(df["label"].value_counts())
-print(df.isna().sum())
-
-
+# ------------------------------
+# 3. Features basiques
+# ------------------------------
 def extract_basic_features(text):
-
     text_lower = text.lower()
-
-    features = {
+    return {
         "length": len(text),
         "num_words": len(text.split()),
         "num_exclam": text.count("!"),
@@ -87,34 +38,81 @@ def extract_basic_features(text):
         "num_digits": sum(c.isdigit() for c in text),
     }
 
-    return features
+# ------------------------------
+# 4. Séparer features et labels
+# ------------------------------
+X = df['text']
+y = df['label']
 
+# ------------------------------
+# 5. Split train/test
+# ------------------------------
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42, stratify=y
+)
 
-# vectorizer = TfidfVectorizer(
-#     ngram_range=(1,2),
-#     max_features=5000,
-#     stop_words="english",
-#     min_df=2
-# )
+# ------------------------------
+# 6. TF-IDF vectorization
+# ------------------------------
+vectorizer = TfidfVectorizer(max_features=10000, ngram_range=(1,2))
+X_train_tfidf = vectorizer.fit_transform(X_train)
+X_test_tfidf = vectorizer.transform(X_test)
 
+# ------------------------------
+# 7. Extraire features basiques
+# ------------------------------
+basic_train = pd.DataFrame([extract_basic_features(t) for t in X_train])
+basic_test = pd.DataFrame([extract_basic_features(t) for t in X_test])
 
+# ------------------------------
+# 8. Combiner TF-IDF + features basiques
+# ------------------------------
+X_train_combined = hstack([X_train_tfidf, basic_train.values])
+X_test_combined = hstack([X_test_tfidf, basic_test.values])
 
+# ------------------------------
+# 9. Modèle Logistic Regression
+# ------------------------------
+clf = LogisticRegression(
+    max_iter=1000,
+    class_weight='balanced',
+    solver='lbfgs',  # multiclass supporté
+    random_state=42
+)
+clf.fit(X_train_combined, y_train)
 
-import joblib
+# ------------------------------
+# 10. Évaluation
+# ------------------------------
+y_pred = clf.predict(X_test_combined)
 
-joblib.dump(model, "models/phishing_model.joblib")
-joblib.dump(vectorizer, "models/tfidf_vectorizer.joblib")
+print("=== Classification Report ===\n")
+print(classification_report(y_test, y_pred))
 
-
-test_email = "Urgent: verify your account now by clicking this link"
-
-score, reasons = compute_risk_score(test_email, model, vectorizer)
-
-print("Test email :", test_email)
-print("Risk score :", score)
-print("Reasons :", reasons)
-
-
-from sklearn.metrics import confusion_matrix
-
+print("=== Matrice de Confusion ===\n")
 print(confusion_matrix(y_test, y_pred))
+
+# ------------------------------
+# 11. Sauvegarde modèle et vectorizer
+# ------------------------------
+joblib.dump(clf, "models/phishing_model.joblib")
+joblib.dump(vectorizer, "models/tfidf_vectorizer.joblib")
+print("\nModèle et vectorizer sauvegardés dans le dossier 'models/'")
+
+# ------------------------------
+# 12. Prédiction individuelle avec compute_risk_score
+# ------------------------------
+sample_email = "Urgent: verify your account now by clicking this link"
+
+# Créer la combinaison TF-IDF + features basiques pour le sample
+sample_vec = vectorizer.transform([sample_email.lower()])
+sample_basic = pd.DataFrame([extract_basic_features(sample_email)])
+sample_combined = hstack([sample_vec, sample_basic.values])
+
+# Utiliser compute_risk_score pour obtenir le score et les raisons
+score, reasons = compute_risk_score(sample_email, clf, vectorizer)
+
+print("\n=== Test Email ===")
+print(f"Email : {sample_email}")
+print(f"Risk score : {score}")
+print(f"Reasons : {reasons}")
